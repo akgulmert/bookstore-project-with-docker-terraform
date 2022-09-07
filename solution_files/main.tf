@@ -19,7 +19,7 @@ provider "aws" {
 
 provider "github" {
   # Configuration options
-  token = "xxxxxxxxxxxxxxxxxxxxxxxxx"
+  token = "your token"
 }
 
 resource "github_repository" "myrepo" {
@@ -68,13 +68,13 @@ resource "aws_instance" "tf-docker-ec2" {
           chmod +x /usr/local/bin/docker-compose
           mkdir -p /home/ec2-user/bookstore-api
           TOKEN="xxxxxxxxxxxxxxxxxxxxxxx"
-          FOLDER="https://$TOKEN@raw.githubusercontent.com/ofidan/bookstore-repo/main/"
+          FOLDER="https://$TOKEN@raw.githubusercontent.com/akgulmert/bookstore-repo/main/"
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/app.py" -L "$FOLDER"bookstore-api.py
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/requirements.txt" -L "$FOLDER"requirements.txt
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/Dockerfile" -L "$FOLDER"Dockerfile
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/docker-compose.yml" -L "$FOLDER"docker-compose.yml
           cd /home/ec2-user/bookstore-api
-          docker build -t olivercw/bookstoreapi:latest .
+          docker build -t sparkleboss/bookstoreapi:latest .
           docker-compose up -d
           EOF
 
