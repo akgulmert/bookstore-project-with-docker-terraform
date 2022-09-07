@@ -23,7 +23,7 @@ provider "github" {
 }
 
 resource "github_repository" "myrepo" {
-  name = "bookstore-repo"
+  name = "bookstore-project-with-docker-terraform"
   auto_init = true
   visibility = "private"
 }
@@ -50,7 +50,7 @@ resource "github_repository_file" "app-files" {
 resource "aws_instance" "tf-docker-ec2" {
   ami = "ami-0f9fc25dd2506cf6d"
   instance_type = "t2.micro"
-  key_name = "oliver"
+  key_name = "your key"
   security_groups = ["docker-sec-group-203"]
   tags = {
     Name = "Web Server of Bookstore"
@@ -68,7 +68,7 @@ resource "aws_instance" "tf-docker-ec2" {
           chmod +x /usr/local/bin/docker-compose
           mkdir -p /home/ec2-user/bookstore-api
           TOKEN="xxxxxxxxxxxxxxxxxxxxxxx"
-          FOLDER="https://$TOKEN@raw.githubusercontent.com/akgulmert/bookstore-repo/main/"
+          FOLDER="https://$TOKEN@raw.githubusercontent.com/akgulmert/bookstore-project-with-docker-terraform/main/"
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/app.py" -L "$FOLDER"bookstore-api.py
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/requirements.txt" -L "$FOLDER"requirements.txt
           curl -s --create-dirs -o "/home/ec2-user/bookstore-api/Dockerfile" -L "$FOLDER"Dockerfile
